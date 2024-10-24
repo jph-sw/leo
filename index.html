@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="de">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Fußball Ticket Buchung</title>
+        <link rel="stylesheet" href="styles.css" />
+    </head>
+    <body>
+        <header>
+            <h1>Fußball Ticket Buchung</h1>
+        </header>
+
+        <section class="match-info">
+            <h2>Wähle dein Spiel:</h2>
+            <select id="match-select">
+                <option value="match1">
+                    FC Bayern München vs. Borussia Dortmund
+                </option>
+                <option value="match2">RB Leipzig vs. VfL Wolfsburg</option>
+                <option value="match3">
+                    Eintracht Frankfurt vs. Schalke 04
+                </option>
+            </select>
+        </section>
+
+        <section class="seating">
+            <h2>Wähle deinen Sitzplatz:</h2>
+            <div class="stadium">
+                <div class="row">
+                    <button class="seat available">1</button>
+                    <button class="seat available">2</button>
+                    <button class="seat available">3</button>
+                    <button class="seat available">4</button>
+                </div>
+                <div class="row">
+                    <button class="seat available">5</button>
+                    <button class="seat available">6</button>
+                    <button class="seat booked">7</button>
+                    <button class="seat available">8</button>
+                </div>
+                <div class="row">
+                    <button class="seat available">9</button>
+                    <button class="seat available">10</button>
+                    <button class="seat available">11</button>
+                    <button class="seat booked">12</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="summary">
+            <h2>Deine Auswahl:</h2>
+            <p>Spiel: <span id="selected-match"></span></p>
+            <p>Sitzplatz: <span id="selected-seat"></span></p>
+            <button id="confirm-button">Buchen</button>
+        </section>
+
+        <script>
+            // JavaScript für die Sitzplatzauswahl
+            const seats = document.querySelectorAll(".seat.available");
+            const selectedSeatDisplay =
+                document.getElementById("selected-seat");
+            const selectedMatchDisplay =
+                document.getElementById("selected-match");
+            const matchSelect = document.getElementById("match-select");
+
+            // Sitzplatz-Event
+            seats.forEach((seat) => {
+                seat.addEventListener("click", () => {
+                    // Aktuellen ausgewählten Sitz hervorheben
+                    document
+                        .querySelectorAll(".seat")
+                        .forEach((s) => s.classList.remove("selected"));
+                    seat.classList.add("selected");
+                    selectedSeatDisplay.innerText = seat.innerText;
+                });
+            });
+
+            // Spiel-Event
+            matchSelect.addEventListener("change", () => {
+                selectedMatchDisplay.innerText =
+                    matchSelect.options[matchSelect.selectedIndex].text;
+            });
+        </script>
+    </body>
+</html>
